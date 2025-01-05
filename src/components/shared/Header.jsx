@@ -45,7 +45,7 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="flex items-center gap-4 w-80 justify-end">
+        <div className="flex items-center gap-4 lg:w-80 justify-end">
           <MobileSettings />
 
           <UserMenu />
