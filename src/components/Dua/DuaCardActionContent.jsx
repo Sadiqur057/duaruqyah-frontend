@@ -30,7 +30,7 @@ export default function DuaCardActionContent({ prayer }) {
             onClick={togglePlay}
             className={`w-12 h-12 rounded-full flex items-center justify-center transition-colors ${
               prayer.audioUrl
-                ? "bg-emerald-500 hover:bg-emerald-600"
+                ? "bg-primary hover:bg-emerald-600"
                 : "bg-gray-200 cursor-not-allowed"
             }`}
             disabled={!prayer.audioUrl}
