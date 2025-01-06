@@ -24,11 +24,11 @@ export default function Header() {
               <input
                 type="search"
                 placeholder="Search by Dua Name"
-                className="w-full px-4 py-2 bg-white rounded-lg focus:outline-none custom-border"
+                className="w-full px-4 py-4 xl:bg-white bg-body rounded-lg focus:outline-none custom-border"
               />
-              <button className="absolute right-3 top-1/2 -translate-y-1/2 bg-gray-50">
+              <button className="absolute right-[6px] top-1/2 -translate-y-1/2 bg-white xl:bg-body rounded-lg py-[13px] px-4">
                 <svg
-                  className="w-5 h-5 text-gray-400"
+                  className="w-5 h-5 text-gray-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -45,9 +45,8 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="flex items-center gap-4 lg:w-80 justify-end">
+        <div className="flex items-center gap-4 2xl:w-80 justify-end">
           <MobileSettings />
-
           <UserMenu />
         </div>
       </div>
