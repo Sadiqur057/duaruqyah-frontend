@@ -10,7 +10,7 @@ export default function MobileSettings() {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="xl:hidden p-2 hover:bg-gray-100 rounded-lg"
+        className="2xl:hidden p-2 hover:bg-gray-100 rounded-lg"
         aria-label="Open settings"
       >
         <svg
@@ -35,7 +35,7 @@ export default function MobileSettings() {
       </button>
 
       <div
-        className={`fixed inset-0 z-50 bg-black bg-opacity-50 transition-opacity duration-200 xl:hidden ${
+        className={`fixed inset-0 z-50 bg-black bg-opacity-50 transition-opacity duration-200 2xl:hidden ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setIsOpen(false)}
