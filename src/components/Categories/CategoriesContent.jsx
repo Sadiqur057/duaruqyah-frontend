@@ -2,53 +2,17 @@
 import Image from "next/image";
 import { useState } from "react";
 import duaImg from "@/assets/images/dua.png";
-export default function CategoriesContent() {
+import { useRouter, useSearchParams } from "next/navigation";
+export default function CategoriesContent({categories}) {
   const [expandedCategory, setExpandedCategory] = useState(null);
-
+  const router= useRouter()
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams.toString());
   const toggleCategory = (categoryId) => {
+    params.set("cat", categoryId)
+    router.push(`?${params.toString()}`);
     setExpandedCategory(expandedCategory === categoryId ? null : categoryId);
   };
-  const categories = [
-    {
-      id: 1,
-      title: "Introduction to Dua",
-      subcategoryCount: 11,
-      duaCount: 15,
-      subcategories: [
-        { id: 1, title: "What is Dua" },
-        { id: 2, title: "Conditions for Dua to be successful" },
-        { id: 3, title: "The Methode Of Dua" },
-        { id: 4, title: "Before Dua" },
-        { id: 5, title: "During Dua" },
-        {
-          id: 6,
-          title: "Prerequisites of writing Dua and drinking it's water",
-        },
-        { id: 7, title: "The correct way to perform Dua for a small child" },
-      ],
-    },
-    {
-      id: 2,
-      title: "Introduction to Dua",
-      subcategoryCount: 11,
-      duaCount: 15,
-      subcategories: [],
-    },
-    {
-      id: 3,
-      title: "Introduction to Dua",
-      subcategoryCount: 11,
-      duaCount: 15,
-      subcategories: [],
-    },
-    {
-      id: 4,
-      title: "Introduction to Dua",
-      subcategoryCount: 11,
-      duaCount: 15,
-      subcategories: [],
-    },
-  ];
   return (
     <aside className="w-full md:w-full xl:w-[380px] bg-white rounded-xl">
       <div className="p-4 rounded-t-xl bg-primary text-white hidden lg:block ">
@@ -79,51 +43,51 @@ export default function CategoriesContent() {
         <nav className="mt-lg-4 space-y-1 h-[calc(100vh-104px)] lg:h-[calc(100vh-286px)] overflow-auto custom-scrollbar">
           <div className="max-w-2xl mx-auto space-y-4">
             {categories.map((category) => (
-              <div key={category.id} className="bg-white rounded-lg">
+              <div key={category?.cat_id} className="bg-white rounded-lg">
                 <div
                   className={`p-3 flex items-center cursor-pointer gap-3 hover:bg-[rgb(232,240,245)] transition-colors rounded-xl ${
-                    expandedCategory === category.id && "bg-[rgb(232,240,245)]"
+                    expandedCategory === category?.cat_id && "bg-[rgb(232,240,245)]"
                   }`}
-                  onClick={() => toggleCategory(category.id)}
+                  onClick={() => toggleCategory(category?.cat_id)}
                 >
                   <Image src={duaImg} alt="dua image" width={40} height={40} />
 
                   <div className="flex-grow">
                     <h3
                       className={`font-medium mb-[2px] ${
-                        expandedCategory === category.id
+                        expandedCategory === category?.cat_id
                           ? "text-primary"
                           : "text-gray-900"
                       }`}
                     >
-                      {category.title}
+                      {category?.cat_name_en}
                     </h3>
                     <p className="text-sm text-light">
-                      Subcategory: {category.subcategoryCount}
+                      Subcategory: {category?.no_of_subcat}
                     </p>
                   </div>
                   <div className="text-right border-l pl-4">
-                    <span className="text-dark">{category.duaCount}</span>
+                    <span className="text-dark">{category?.no_of_dua}</span>
                     <p className="text-sm text-light">Duas</p>
                   </div>
                 </div>
 
-                {expandedCategory === category.id &&
-                  category.subcategories.length > 0 && (
+                {expandedCategory === category?.cat_id &&
+                  category?.sub_categories?.length > 0 && (
                     <div className="pl-6 pr-4 pb-4 mt-1">
                       <div className="relative">
                         <div className="absolute left-[10px] top-0 bottom-0 w-[2px] border-l-[2px] border-primary border-dashed" />
 
                         <div className="space-y-4">
-                          {category.subcategories.map((sub) => (
+                          {category?.sub_categories?.map((sub) => (
                             <div
-                              key={sub.id}
+                              key={sub?.subcat_id}
                               className="relative flex items-center group"
                             >
                               <div className="absolute left-[5px] w-3 h-3 rounded-full bg-primary" />
 
                               <p className="ml-8 text-gray-600 group-hover:text-green-600 transition-colors">
-                                {sub.title}
+                                {sub?.subcat_name_en}
                               </p>
                             </div>
                           ))}

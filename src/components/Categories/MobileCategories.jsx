@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Sidebar from "@/components/Categories/CategoriesContent";
 
-const MobileCategories = () => {
+const MobileCategories = ({categories}) => {
   const [isOpen, setIsOpen] = useState(false);
   const title = "Dua's importance";
   return (
@@ -64,7 +64,7 @@ const MobileCategories = () => {
               </svg>
             </button>
           </div>
-          <Sidebar />
+          <Sidebar categories={categories}/>
         </div>
       </div>
     </>

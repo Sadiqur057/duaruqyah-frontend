@@ -1,9 +1,9 @@
 import React from "react";
 import CategoriesContent from "./CategoriesContent";
-const Categories = () => {
+const Categories = ({categories}) => {
   return (
     <div className="hidden lg:block rounded-xl">
-      <CategoriesContent />
+      <CategoriesContent categories={categories}/>
     </div>
   );
 };

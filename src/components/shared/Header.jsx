@@ -16,7 +16,7 @@ export default function Header() {
               height={72}
               className="w-[72px] h-[72px] lg:hidden"
             />
-            <h1 className="text-xl font-semibold text-dark">Dua & Ruqyah</h1>
+            <h1 className="text-2xl font-semibold text-dark">Dua Page</h1>
           </div>
 
           <div className="flex-1 max-w-sm hidden lg:block">
