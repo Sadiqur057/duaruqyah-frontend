@@ -75,7 +75,7 @@ export default function SettingsContent() {
         }
       >
         <div className="space-y-2 flex justify-between items-center px-3">
-          <label htmlFor="arabic" className="flex-1">
+          <label htmlFor="arabic" className="flex-1 cursor-pointer">
             Show Arabic
           </label>
           <input
@@ -86,7 +86,7 @@ export default function SettingsContent() {
           />
         </div>
         <div className="space-y-2 flex justify-between items-center px-3">
-          <label htmlFor="translation" className="flex-1">
+          <label htmlFor="translation" className="flex-1 cursor-pointer">
             Show Translation
           </label>
           <input
@@ -97,7 +97,7 @@ export default function SettingsContent() {
           />
         </div>
         <div className="space-y-2 flex justify-between items-center px-3">
-          <label htmlFor="transliteration" className="flex-1">
+          <label htmlFor="transliteration" className="flex-1 cursor-pointer">
             Show Transliteration
           </label>
           <input
@@ -108,7 +108,7 @@ export default function SettingsContent() {
           />
         </div>
         <div className="space-y-2 flex justify-between items-center px-3">
-          <label htmlFor="reference" className="flex-1">
+          <label htmlFor="reference" className="flex-1 cursor-pointer">
             Show Reference
           </label>
           <input
