@@ -38,4 +38,7 @@ p {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #888;
 }
-
+.text-shadow {
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: limegreen;
+} 
