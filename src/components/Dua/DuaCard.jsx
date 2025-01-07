@@ -1,32 +1,41 @@
 import React from "react";
 import DuaCardActionContent from "./DuaCardActionContent";
-
-const DuaCard = ({ prayer }) => {
+import duaIcon from "@/assets/images/icons/duaIcon.png";
+import Image from "next/image";
+const DuaCard = ({ dua }) => {
   return (
     <div className="space-y-4 bg-white p-4 rounded-xl">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-          <span className="text-white text-sm">{prayer.id}</span>
+        <Image src={duaIcon} alt={"dua"} width={34} height={34} />
+        <span className="text-sm">{dua?.id}</span>
+
+        <h2 className="text-primary text-lg font-medium">{dua?.dua_name_en}</h2>
+      </div>
+      {dua?.top_en && (
+        <div className="mb-4">
+          <p>{dua?.top_en}</p>
         </div>
-        <h2 className="text-primary text-lg font-medium">{prayer.title}</h2>
-      </div>
+      )}
+      {dua.dua_arabic && (
+        <div className="text-right mb-6">
+          <p className="text-2xl leading-loose text-gray-800 font-arabic">
+            {dua?.dua_arabic}
+          </p>
+        </div>
+      )}
 
-      <div className="text-right mb-6">
-        <p className="text-2xl leading-loose text-gray-800 font-arabic">
-          {prayer.arabicText}
-        </p>
-      </div>
+      {dua.translation_en && (
+        <div className="mb-6">
+          <p>Translation: {dua?.translation_en}</p>
+        </div>
+      )}
+      {dua?.bottom_en && (
+        <div className="mb-4">
+          <p>{dua?.bottom_en}</p>
+        </div>
+      )}
 
-      <div className="mb-4">
-        <p className="text-gray-600 italic">
-          Transliteration: {prayer.transliteration}
-        </p>
-      </div>
-
-      <div className="mb-6">
-        <p className="text-gray-700">Translation: {prayer.translation}</p>
-      </div>
-      <DuaCardActionContent prayer={prayer} />
+      <DuaCardActionContent dua={dua} />
     </div>
   );
 };

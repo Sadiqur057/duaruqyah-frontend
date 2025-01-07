@@ -2,15 +2,15 @@
 import Image from "next/image";
 import { useState } from "react";
 import duaImg from "@/assets/images/dua.png";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 export default function CategoriesContent({categories}) {
   const [expandedCategory, setExpandedCategory] = useState(null);
   const router= useRouter()
-  const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams.toString());
-  const toggleCategory = (categoryId) => {
-    params.set("cat", categoryId)
-    router.push(`?${params.toString()}`);
+  const toggleCategory = (categoryId,name) => {
+    const { searchParams } = router;
+    const params = new URLSearchParams(searchParams);
+    params.set("cat", categoryId);
+    router.push(`${name.replace(/\s+/g,"-").toLowerCase()}?${params.toString()}`);
     setExpandedCategory(expandedCategory === categoryId ? null : categoryId);
   };
   return (
@@ -48,7 +48,7 @@ export default function CategoriesContent({categories}) {
                   className={`p-3 flex items-center cursor-pointer gap-3 hover:bg-[rgb(232,240,245)] transition-colors rounded-xl ${
                     expandedCategory === category?.cat_id && "bg-[rgb(232,240,245)]"
                   }`}
-                  onClick={() => toggleCategory(category?.cat_id)}
+                  onClick={() => toggleCategory(category?.cat_id, category?.cat_name_en)}
                 >
                   <Image src={duaImg} alt="dua image" width={40} height={40} />
 
@@ -81,7 +81,7 @@ export default function CategoriesContent({categories}) {
                         <div className="space-y-4">
                           {category?.sub_categories?.map((sub) => (
                             <div
-                              key={sub?.subcat_id}
+                              key={sub?.subcat_name_en}
                               className="relative flex items-center group"
                             >
                               <div className="absolute left-[5px] w-3 h-3 rounded-full bg-primary" />

@@ -23,7 +23,7 @@ const prayers = [
   },
 ];
 
-export default function DuaContent() {
+export default function DuaContent({category}) {
   return (
     <main className="flex-1 overflow-auto custom-scrollbar h-[calc(100vh-114px)]">
       <div className="space-y-6">
@@ -35,8 +35,8 @@ export default function DuaContent() {
             </span>
           </p>
         </div>
-        {prayers.map((prayer) => (
-          <DuaCard key={prayer.id} prayer={prayer} />
+        {category.map((dua,index) => (
+          <DuaCard key={index} dua={dua} />
         ))}
       </div>
     </main>

@@ -2,12 +2,12 @@
 
 import { useState, useRef } from "react";
 
-export default function DuaCardActionContent({ prayer }) {
+export default function DuaCardActionContent({ dua }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
 
   const togglePlay = () => {
-    if (!audioRef.current || !prayer.audioUrl) return;
+    if (!audioRef.current || !dua?.audio) return;
 
     if (isPlaying) {
       audioRef.current.pause();
@@ -24,16 +24,16 @@ export default function DuaCardActionContent({ prayer }) {
   return (
     <>
       <div className="flex justify-between items-center">
-        {prayer.audioUrl && (
+        {dua?.audio && (
         <div className="flex gap-2">
           <button
             onClick={togglePlay}
             className={`w-12 h-12 rounded-full flex items-center justify-center transition-colors ${
-              prayer.audioUrl
+              dua?.audio
                 ? "bg-primary hover:bg-emerald-600"
                 : "bg-gray-200 cursor-not-allowed"
             }`}
-            disabled={!prayer.audioUrl}
+            disabled={!dua?.audio}
           >
             <svg
               className="w-6 h-6 text-white"
@@ -61,7 +61,7 @@ export default function DuaCardActionContent({ prayer }) {
           
             <audio
               ref={audioRef}
-              src={prayer.audioUrl}
+              src={dua?.audio}
               onEnded={handleAudioEnded}
               preload="auto"
               controls
