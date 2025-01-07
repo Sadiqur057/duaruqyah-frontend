@@ -86,9 +86,9 @@ export default function CategoriesContent({categories}) {
                             >
                               <div className="absolute left-[5px] w-3 h-3 rounded-full bg-primary" />
 
-                              <p className="ml-8 text-gray-600 group-hover:text-green-600 transition-colors">
+                              <a href={`#${sub?.subcat_id}`} className="ml-8 text-gray-600 group-hover:text-green-600 transition-colors">
                                 {sub?.subcat_name_en}
-                              </p>
+                              </a>
                             </div>
                           ))}
                         </div>

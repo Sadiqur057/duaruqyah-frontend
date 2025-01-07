@@ -4,7 +4,7 @@ import duaIcon from "@/assets/images/icons/duaIcon.png";
 import Image from "next/image";
 const DuaCard = ({ dua }) => {
   return (
-    <div className="space-y-4 bg-white p-4 rounded-xl">
+    <div className="space-y-4 bg-white p-4 rounded-xl" id={dua?.subcat_id}>
       <div className="flex items-center gap-3 mb-6">
         <Image src={duaIcon} alt={"dua"} width={34} height={34} />
         <span className="text-sm">{dua?.id}</span>

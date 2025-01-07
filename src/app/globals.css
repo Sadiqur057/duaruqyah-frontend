@@ -8,10 +8,12 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+* {
+  scroll-behavior: smooth;
+}
 body {
   @apply text-gray-900;
 }
-
 .arabic-text {
   font-family: "Traditional Arabic", serif;
   direction: rtl;
@@ -41,4 +43,4 @@ p {
 .text-shadow {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: limegreen;
-} 
+}
