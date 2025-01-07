@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Sidebar from "@/components/Categories/CategoriesContent";
 
-const MobileCategories = ({categories}) => {
+const MobileCategories = ({ categories }) => {
   const [isOpen, setIsOpen] = useState(false);
   const title = "Dua's importance";
   return (
-    <>
+    <Suspense>
       <div className="flex items-center p-4 bg-white lg:hidden overflow-auto mt-6 mx-8 rounded-md">
         <button
           onClick={() => setIsOpen(true)}
@@ -64,10 +64,10 @@ const MobileCategories = ({categories}) => {
               </svg>
             </button>
           </div>
-          <Sidebar categories={categories}/>
+          <Sidebar categories={categories} />
         </div>
       </div>
-    </>
+    </Suspense>
   );
 };
 

@@ -2,6 +2,8 @@ import Image from "next/image";
 import MobileSettings from "../Settings/MobileSettings";
 import logo from "@/assets/images/logo.png";
 import UserMenu from "./UserMenu";
+import { Poppins } from "next/font/google";
+import { poppins } from "@/utils/fonts";
 
 export default function Header() {
   return (
@@ -16,7 +18,9 @@ export default function Header() {
               height={72}
               className="w-16 h-16 sm:w-[72px] sm:h-[72px] lg:hidden"
             />
-            <h1 className="text-lg sm:text-2xl font-semibold text-dark">Dua Page</h1>
+            <h1 className={`text-lg sm:text-2xl font-semibold text-dark ${poppins.className}`}>
+              Dua Page
+            </h1>
           </div>
 
           <div className="flex-1 max-w-sm hidden lg:block">

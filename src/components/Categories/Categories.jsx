@@ -1,9 +1,11 @@
-import React from "react";
+import React, { Suspense } from "react";
 import CategoriesContent from "./CategoriesContent";
-const Categories = ({categories}) => {
+const Categories = ({ categories, search }) => {
   return (
     <div className="hidden lg:block rounded-xl">
-      <CategoriesContent categories={categories}/>
+      <Suspense>
+        <CategoriesContent categories={categories} search={search} />
+      </Suspense>
     </div>
   );
 };
