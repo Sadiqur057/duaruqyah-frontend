@@ -1,10 +1,14 @@
 "use client";
-
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function DuaCardActionContent({ dua }) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isClient, setIsClient] = useState(false); // New state for checking client-side
   const audioRef = useRef(null);
+
+  useEffect(() => {
+    setIsClient(true); // Set client flag after hydration
+  }, []);
 
   const togglePlay = () => {
     if (!audioRef.current || !dua?.audio) return;
@@ -21,10 +25,16 @@ export default function DuaCardActionContent({ dua }) {
     setIsPlaying(false);
   };
 
+  if (!dua || !isClient) return null;
+
+  const audioSrc = dua?.audio?.replace(
+    "http://www.ihadis.com/",
+    "https://api.duaruqyah.com/"
+  );
+
   return (
-    <>
-      <div className="flex justify-between items-center">
-        {dua?.audio && (
+    <div className="flex justify-between items-center">
+      {dua?.audio && (
         <div className="flex gap-2">
           <button
             onClick={togglePlay}
@@ -36,7 +46,7 @@ export default function DuaCardActionContent({ dua }) {
             disabled={!dua?.audio}
           >
             <svg
-              className="w-6 h-6 text-white"
+              className="w-10 h-10 text-white"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -58,99 +68,93 @@ export default function DuaCardActionContent({ dua }) {
               )}
             </svg>
           </button>
-          
-            <audio
-              ref={audioRef}
-              src={dua?.audio}
-              onEnded={handleAudioEnded}
-              preload="auto"
-              controls
-              className={isPlaying ? "block h-12" : "hidden"}
-            />
+          <audio
+            ref={audioRef}
+            src={audioSrc}
+            onEnded={handleAudioEnded}
+            preload="auto"
+            controls={true}
+            className="hidden"
+          />
         </div>
-          )}
-
-        <div className="flex gap-4 justify-end flex-1">
-          <button className="text-gray-400 hover:text-gray-600" title="Copy">
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-              />
-            </svg>
-          </button>
-          <button
-            className="text-gray-400 hover:text-gray-600"
-            title="Bookmark"
+      )}
+      <div className="flex gap-4 justify-end flex-1">
+        <button className="text-gray-400 hover:text-gray-600" title="Copy">
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-              />
-            </svg>
-          </button>
-          <button className="text-gray-400 hover:text-gray-600" title="Learn">
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-              />
-            </svg>
-          </button>
-          <button className="text-gray-400 hover:text-gray-600" title="Share">
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-              />
-            </svg>
-          </button>
-          <button className="text-gray-400 hover:text-gray-600" title="Info">
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </button>
-        </div>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+            />
+          </svg>
+        </button>
+        <button className="text-gray-400 hover:text-gray-600" title="Bookmark">
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+            />
+          </svg>
+        </button>
+        <button className="text-gray-400 hover:text-gray-600" title="Learn">
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+            />
+          </svg>
+        </button>
+        <button className="text-gray-400 hover:text-gray-600" title="Share">
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+            />
+          </svg>
+        </button>
+        <button className="text-gray-400 hover:text-gray-600" title="Info">
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </button>
       </div>
-    </>
+    </div>
   );
 }

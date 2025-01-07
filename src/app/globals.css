@@ -21,7 +21,7 @@ body {
 .custom-border {
   border: 0.5px solid rgb(226, 226, 226);
 }
-p {
+p, .text-default {
   color: rgb(57, 57, 57);
 }
 .custom-scrollbar::-webkit-scrollbar {

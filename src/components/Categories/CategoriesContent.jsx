@@ -1,21 +1,32 @@
 "use client";
+
 import Image from "next/image";
 import { useState } from "react";
 import duaImg from "@/assets/images/dua.png";
 import { useRouter } from "next/navigation";
-export default function CategoriesContent({categories}) {
+
+export default function CategoriesContent({ categories }) {
   const [expandedCategory, setExpandedCategory] = useState(null);
-  const router= useRouter()
-  const toggleCategory = (categoryId,name) => {
+  const [expandedSubCategory, setExpandedSubCategory] = useState(null);
+  const router = useRouter();
+
+  const toggleCategory = (categoryId, name) => {
     const { searchParams } = router;
     const params = new URLSearchParams(searchParams);
     params.set("cat", categoryId);
-    router.push(`${name.replace(/\s+/g,"-").toLowerCase()}?${params.toString()}`);
+    router.push(
+      `${name.replace(/\s+/g, "-").toLowerCase()}?${params.toString()}`
+    );
     setExpandedCategory(expandedCategory === categoryId ? null : categoryId);
   };
+
+  const toggleSubCategory = (subCatId) => {
+    setExpandedSubCategory(expandedSubCategory === subCatId ? null : subCatId);
+  };
+
   return (
-    <aside className="w-full md:w-full xl:w-[380px] bg-white rounded-xl">
-      <div className="p-4 rounded-t-xl bg-primary text-white hidden lg:block ">
+    <aside className="w-full md:w-full lg:w-[380px] bg-white rounded-xl">
+      <div className="p-4 rounded-t-xl bg-primary text-white hidden lg:block">
         <h2 className="text-lg text-center">Categories</h2>
       </div>
       <div className="p-4">
@@ -43,15 +54,17 @@ export default function CategoriesContent({categories}) {
         <nav className="mt-lg-4 space-y-1 h-[calc(100vh-104px)] lg:h-[calc(100vh-286px)] overflow-auto custom-scrollbar">
           <div className="max-w-2xl mx-auto space-y-4">
             {categories.map((category) => (
-              <div key={category?.cat_id} className="bg-white rounded-lg">
+              <div key={category?.cat_name_en} className="bg-white rounded-lg">
                 <div
                   className={`p-3 flex items-center cursor-pointer gap-3 hover:bg-[rgb(232,240,245)] transition-colors rounded-xl ${
-                    expandedCategory === category?.cat_id && "bg-[rgb(232,240,245)]"
+                    expandedCategory === category?.cat_id &&
+                    "bg-[rgb(232,240,245)]"
                   }`}
-                  onClick={() => toggleCategory(category?.cat_id, category?.cat_name_en)}
+                  onClick={() =>
+                    toggleCategory(category?.cat_id, category?.cat_name_en)
+                  }
                 >
                   <Image src={duaImg} alt="dua image" width={40} height={40} />
-
                   <div className="flex-grow">
                     <h3
                       className={`font-medium mb-[2px] ${
@@ -77,18 +90,51 @@ export default function CategoriesContent({categories}) {
                     <div className="pl-6 pr-4 pb-4 mt-1">
                       <div className="relative">
                         <div className="absolute left-[10px] top-0 bottom-0 w-[2px] border-l-[2px] border-primary border-dashed" />
-
                         <div className="space-y-4">
                           {category?.sub_categories?.map((sub) => (
                             <div
-                              key={sub?.subcat_name_en}
-                              className="relative flex items-center group"
+                              key={sub?.subcat_id}
+                              className="space-y-3 mt-3"
                             >
-                              <div className="absolute left-[5px] w-3 h-3 rounded-full bg-primary" />
+                              <div
+                                className="relative flex items-center group cursor-pointer"
+                                onClick={() =>
+                                  toggleSubCategory(sub?.subcat_id)
+                                }
+                              >
+                                <div className="absolute left-[5px] w-3 h-3 rounded-full bg-primary" />
+                                <a
+                                  href={`#${sub?.subcat_id}`}
+                                  className={`ml-8 fw-medium ${
+                                    expandedSubCategory == sub?.subcat_id
+                                      ? "text-primary"
+                                      : "text-default"
+                                  } font-medium`}
+                                >
+                                  {sub?.subcat_name_en}
+                                </a>
+                              </div>
 
-                              <a href={`#${sub?.subcat_id}`} className="ml-8 text-gray-600 group-hover:text-green-600 transition-colors">
-                                {sub?.subcat_name_en}
-                              </a>
+                              {expandedSubCategory === sub?.subcat_id && (
+                                <div className="ml-8 space-y-2">
+                                  {sub?.duas?.map((dua, index) => (
+                                    <div
+                                      key={dua?.dua_id}
+                                      className="flex items-center gap-2 pl-4 group cursor-pointer hover:text-primary transition-colors"
+                                    >
+                                      <div className="w-3 h-3 flex-shrink-0">
+                                        <div className="w-[6px] h-[6px] border-t border-r border-current transform rotate-45 translate-x-1 translate-y-1" />
+                                      </div>
+                                      <a
+                                        href={`#${dua?.dua_name_en}`}
+                                        className="text-sm py-1"
+                                      >
+                                        {dua?.dua_name_en}
+                                      </a>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
                             </div>
                           ))}
                         </div>

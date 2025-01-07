@@ -27,14 +27,6 @@ export default function DuaContent({category}) {
   return (
     <main className="flex-1 overflow-auto custom-scrollbar h-[calc(100vh-114px)]">
       <div className="space-y-6">
-        <div className="p-4 bg-white rounded-xl fw-medium">
-          <p className="text-primary">
-            Section:{" "}
-            <span className="text-dark">
-              The servant is dependent on his Lord
-            </span>
-          </p>
-        </div>
         {category.map((dua,index) => (
           <DuaCard key={index} dua={dua} />
         ))}
