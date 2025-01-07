@@ -46,3 +46,4 @@ export default async function DuaPageLayout({ children, search }) {
     </>
   );
 }
+export const dynamic = "force-dynamic"
