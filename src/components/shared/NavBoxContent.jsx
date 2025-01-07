@@ -52,7 +52,21 @@ const NavBoxContent = () => {
       />
       {navLinks.map((link) => (
         <button
-          className="p-[10px] rounded-full bg-body hover:bg-gray-100"
+          className="p-[10px] xl:block hidden rounded-full bg-body hover:bg-gray-100"
+          key={link?.alt}
+        >
+          <Image
+            src={link?.image}
+            alt={link?.alt}
+            width="24"
+            height="24"
+            className="w-6"
+          />
+        </button>
+      ))}
+      {navLinks.slice(0, 5).map((link) => (
+        <button
+          className="p-[10px] block xl:hidden rounded-full bg-body hover:bg-gray-100"
           key={link?.alt}
         >
           <Image

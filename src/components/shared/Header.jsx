@@ -5,18 +5,18 @@ import UserMenu from "./UserMenu";
 
 export default function Header() {
   return (
-    <header className="flex-1 bg-white xl:bg-body xl:pt-6 py-4 xl:pb-0 px-1">
-      <div className="px-8 h-16 flex items-center justify-between gap-6">
-        <div className="flex flex-1 items-center justify-between gap-6">
-          <div className="flex items-center gap-2">
+    <header className="flex-1 bg-white xl:bg-body xl:pt-6 py-4 xl:pb-0 xl:px-1">
+      <div className="px-8 h-16 flex items-center justify-between gap-2 xl:gap-6">
+        <div className="flex flex-1 items-center justify-between gap-2 xl:gap-6">
+          <div className="flex items-center gap-1 xl:gap-2">
             <Image
               src={logo}
               alt="Dua & Ruqyah"
               width={72}
               height={72}
-              className="w-[72px] h-[72px] lg:hidden"
+              className="w-16 h-16 sm:w-[72px] sm:h-[72px] lg:hidden"
             />
-            <h1 className="text-2xl font-semibold text-dark">Dua Page</h1>
+            <h1 className="text-lg sm:text-2xl font-semibold text-dark">Dua Page</h1>
           </div>
 
           <div className="flex-1 max-w-sm hidden lg:block">
