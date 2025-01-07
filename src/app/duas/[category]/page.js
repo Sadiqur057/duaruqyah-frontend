@@ -40,3 +40,4 @@ export default async function DuaPage({ searchParams }) {
     notFound();
   }
 }
+export const dynamic = "force-dynamic"
