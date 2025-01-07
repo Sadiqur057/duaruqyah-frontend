@@ -1,5 +1,8 @@
 import RedirectionContent from "@/components/shared/RedirectionContent";
+import React from "react";
 
-export default async function Home() {
+const page = () => {
   return <RedirectionContent />;
-}
+};
+
+export default page;
