@@ -1,8 +1,6 @@
 
-import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import { inter } from "@/utils/fonts";
 
 export default async function RootLayout({ children }) {
 

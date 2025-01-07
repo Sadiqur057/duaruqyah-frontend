@@ -1,5 +1,6 @@
 import DuaContent from "@/components/Dua/DuaContent";
 import { notFound } from "next/navigation";
+import DuaPageLayout from "../page";
 
 export async function generateStaticParams() {
   const res = await fetch("http://localhost:3001/api/categories", {
@@ -23,12 +24,18 @@ async function getDuaData(cat) {
   return res.json();
 }
 
-export default async function DuaPage({ params }) {
-  const cat = params.cat || "1";
-
+export default async function DuaPage({ searchParams }) {
+  const params = await searchParams;
+  const cat = params?.cat || 1;
+  const search = params?.search || ""
+  if (!cat) return;
   try {
     const category = await getDuaData(cat);
-    return <DuaContent category={category} />;
+    return (
+      <DuaPageLayout search={search}>
+        <DuaContent category={category} />
+      </DuaPageLayout>
+    );
   } catch (error) {
     notFound();
   }
