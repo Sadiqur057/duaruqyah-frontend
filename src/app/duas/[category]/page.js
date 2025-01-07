@@ -1,19 +1,35 @@
 import DuaContent from "@/components/Dua/DuaContent";
-import React from "react";
+import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
-  const res = await fetch("http://localhost:3001/api/categories");
+  const res = await fetch("http://localhost:3001/api/categories", {
+    next: { revalidate: 600 },
+  });
   const categories = await res.json();
-  return categories.slice(0,10).map((category) => ({
+  return categories.slice(0, 10).map((category) => ({
     cat: category.cat_id.toString(),
   }));
 }
 
-const DuaPage = async ({ searchParams }) => {
-  const cat = searchParams?.cat || "1";
-  const res = await fetch(`http://localhost:3001/api/dua/${cat}`);
-  const category = await res.json();
-  return <DuaContent category={category} />;
-};
+async function getDuaData(cat) {
+  const res = await fetch(`http://localhost:3001/api/dua/${cat}`, {
+    next: { revalidate: 600 },
+  });
 
-export default DuaPage;
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
+export default async function DuaPage({ params }) {
+  const cat = params.cat || "1";
+
+  try {
+    const category = await getDuaData(cat);
+    return <DuaContent category={category} />;
+  } catch (error) {
+    notFound();
+  }
+}
