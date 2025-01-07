@@ -22,11 +22,11 @@ export default function CategoriesContent({ categories, search }) {
     router.push(
       `${name.replace(/\s+/g, "-").toLowerCase()}?${params.toString()}`
     );
-    setExpandedCategory(expandedCategory === categoryId ? null : categoryId);
+    setExpandedCategory(expandedCategory == categoryId ? null : categoryId);
   };
 
   const toggleSubCategory = (subCatId) => {
-    setExpandedSubCategory(expandedSubCategory === subCatId ? null : subCatId);
+    setExpandedSubCategory(expandedSubCategory == subCatId ? null : subCatId);
   };
 
   const handleSearch = (e) => {
@@ -55,7 +55,7 @@ export default function CategoriesContent({ categories, search }) {
             defaultValue={search || ""}
             type="search"
             placeholder="Search Categories"
-            className="w-full px-4 py-2 pl-10 bg-gray-50 rounded-lg focus:outline-none custom-border"
+            className="w-full px-4 py-3 pl-10 bg-gray-50 rounded-lg focus:outline-none custom-border focus:border-primary/40"
           />
           <svg
             className="w-5 h-5 text-light absolute left-3 top-1/2 -translate-y-1/2"
@@ -92,7 +92,7 @@ export default function CategoriesContent({ categories, search }) {
                   <div className="flex-grow">
                     <h3
                       className={`font-semibold mb-[2px] ${
-                        expandedCategory === category?.cat_id
+                        expandedCategory == category?.cat_id
                           ? "text-primary"
                           : "text-default"
                       }`}
@@ -141,7 +141,7 @@ export default function CategoriesContent({ categories, search }) {
                                 </a>
                               </div>
 
-                              {expandedSubCategory === sub?.subcat_id && (
+                              {expandedSubCategory == sub?.subcat_id && (
                                 <div className="ml-8 space-y-2">
                                   {sub?.duas?.map((dua, index) => (
                                     <div

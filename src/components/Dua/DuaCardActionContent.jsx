@@ -33,7 +33,7 @@ export default function DuaCardActionContent({ dua }) {
   );
 
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center pt-4">
       {dua?.audio && (
         <div className="flex gap-2">
           <button

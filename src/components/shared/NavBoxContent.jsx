@@ -66,7 +66,7 @@ const NavBoxContent = () => {
       ))}
       {navLinks.slice(0, 5).map((link) => (
         <button
-          className="p-8 block xl:hidden rounded-full bg-[rgb(232,240,245)] hover:bg-gray-100"
+          className="p-3 block xl:hidden rounded-full bg-[rgb(232,240,245)] hover:bg-gray-100"
           key={link?.alt}
         >
           <Image
