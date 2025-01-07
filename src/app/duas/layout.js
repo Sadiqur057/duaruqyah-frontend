@@ -3,17 +3,21 @@ import Header from "@/components/shared/Header";
 import NavBoxContent from "@/components/shared/NavBoxContent";
 import Categories from "@/components/Categories/Categories";
 import Settings from "@/components/Settings/Settings";
-export async function generateStaticParams() {
-  const res = await fetch("http://localhost:3001/api/categories");
-  const categories = await res.json();
-  return categories.map((category) => ({
-    id: category.cat_id.toString(),
-  }));
+
+async function getCategories() {
+  const res = await fetch("http://localhost:3001/api/categories", {
+    next: { revalidate: 600 },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch categories");
+  }
+
+  return res.json();
 }
 
 export default async function RootLayout({ children }) {
-  const res = await fetch("http://localhost:3001/api/categories");
-  const categories = await res.json();
+  const categories = await getCategories();
   return (
     <div className="flex flex-col">
       <>
