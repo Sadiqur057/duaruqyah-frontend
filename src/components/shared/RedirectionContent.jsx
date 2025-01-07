@@ -12,7 +12,7 @@ const RedirectionContent = () => {
         </h3>
         <p className="max-w-md text-light mx-auto">
           We&apos;re sorry, the page you requested could not be found.
-          Redirecting you to Dua's Page
+          Redirecting you to Dua&apos;s Page
         </p>
       </div>
     </div>
