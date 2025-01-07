@@ -2,15 +2,15 @@ import DuaContent from "@/components/Dua/DuaContent";
 import { notFound } from "next/navigation";
 import DuaPageLayout from "../page";
 
-export async function generateStaticParams() {
-  const res = await fetch("http://localhost:3001/api/categories", {
-    next: { revalidate: 600 },
-  });
-  const categories = await res.json();
-  return categories.slice(0, 10).map((category) => ({
-    cat: category.cat_id.toString(),
-  }));
-}
+// export async function generateStaticParams() {
+//   const res = await fetch("http://localhost:3001/api/categories", {
+//     next: { revalidate: 600 },
+//   });
+//   const categories = await res.json();
+//   return categories.slice(0, 10).map((category) => ({
+//     cat: category.cat_id.toString(),
+//   }));
+// }
 
 async function getDuaData(cat) {
   const res = await fetch(`http://localhost:3001/api/dua/${cat}`, {
