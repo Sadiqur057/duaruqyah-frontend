@@ -3,13 +3,14 @@ import { notFound } from "next/navigation";
 import DuaPageLayout from "../page";
 import { Suspense } from "react";
 
-export async function getStaticPaths() {
+export async function generateStaticParams() {
   const res = await fetch("http://localhost:3001/api/categories", {
     next: { revalidate: 600 },
   });
   const categories = await res.json();
-  const category = categories.slice(0, 10).map((category) => ({
-    params: { cat: category.cat_id.toString() },
+
+  return categories.slice(0, 10).map((category) => ({
+    category: category.cat_id.toString(),
   }));
 }
 
@@ -44,4 +45,3 @@ export default async function DuaPage({ searchParams }) {
     notFound();
   }
 }
-export const dynamic = "force-dynamic";
